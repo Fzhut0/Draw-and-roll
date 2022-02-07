@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class LineRemover : MonoBehaviour
 {
     [SerializeField] Material removeColor;
     [SerializeField] GameObject reverseButtonActive;
+    [SerializeField] GameObject removeControler;
 
     [SerializeField] Material originalMaterial;
 
@@ -17,7 +19,9 @@ public class LineRemover : MonoBehaviour
     }
     private void Update()
     {
+        removeControler = GameObject.FindGameObjectWithTag("ReverseCount");
         reverseButtonActive = GameObject.FindGameObjectWithTag("Reverse");
+
     }
 
 
@@ -38,6 +42,15 @@ public class LineRemover : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
+        if (removeControler.GetComponent<ReverseButtonControl>().undoCount > 0)
+        {
+            Destroy(gameObject);
+            removeControler.GetComponent<ReverseButtonControl>().undoCount--;
+            removeControler.GetComponent<ReverseButtonControl>().UpdateDisplay();
+        }
+
+
     }
+
+
 }
