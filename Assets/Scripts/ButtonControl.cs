@@ -21,13 +21,13 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         currentColor = linePrefab.GetComponent<LineRenderer>().sharedMaterial.color;
         if (currentColor == startingColor.color)
         {
-            this.GetComponent<Button>().interactable = true;
+            GetComponent<Button>().interactable = true;
         }
 
         if (mouseOver)
         {
             lineControler.SetActive(false);
-            this.GetComponent<Button>().interactable = true;
+            GetComponent<Button>().interactable = true;
 
         }
         else
@@ -35,7 +35,7 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             lineControler.SetActive(true);
             if (startingColor.color != otherButton.GetComponent<ButtonControl>().startingColor.color)
             {
-                this.GetComponent<Button>().interactable = false;
+                GetComponent<Button>().interactable = false;
             }
         }
 
