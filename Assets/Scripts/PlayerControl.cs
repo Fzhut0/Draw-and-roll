@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
             lineControl.SetActive(false);
             Debug.Log("wrong color");
         }
+        else { return; }
 
     }
 
