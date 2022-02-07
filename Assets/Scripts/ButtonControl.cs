@@ -8,7 +8,9 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [SerializeField] GameObject lineControler;
     [SerializeField] GameObject linePrefab;
-    [SerializeField] GameObject otherButton;
+    [SerializeField] GameObject otherButton1;
+    [SerializeField] GameObject otherButton2;
+    [SerializeField] GameObject reverseButton;
 
     bool mouseOver = false;
     [SerializeField] Material startingColor;
@@ -18,27 +20,7 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Update()
     {
-        currentColor = linePrefab.GetComponent<LineRenderer>().sharedMaterial.color;
-        if (currentColor == startingColor.color)
-        {
-            GetComponent<Button>().interactable = true;
-        }
-
-        if (mouseOver)
-        {
-            lineControler.SetActive(false);
-            GetComponent<Button>().interactable = true;
-
-        }
-        else
-        {
-            lineControler.SetActive(true);
-            if (startingColor.color != otherButton.GetComponent<ButtonControl>().startingColor.color)
-            {
-                GetComponent<Button>().interactable = false;
-            }
-        }
-
+        ColorButtonHandler();
     }
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
@@ -51,6 +33,30 @@ public class ButtonControl : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         mouseOver = false;
     }
 
+    void ColorButtonHandler()
+    {
+        currentColor = linePrefab.GetComponent<LineRenderer>().sharedMaterial.color;
+        if (currentColor == startingColor.color)
+        {
+            GetComponent<Button>().interactable = true;
+        }
+
+
+        if (mouseOver)
+        {
+            lineControler.SetActive(false);
+            GetComponent<Button>().interactable = true;
+
+        }
+        else
+        {
+            lineControler.SetActive(true);
+            if (startingColor.color != otherButton1.GetComponent<ButtonControl>().startingColor.color)
+            {
+                GetComponent<Button>().interactable = false;
+            }
+        }
+    }
 
 
 }
