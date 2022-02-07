@@ -42,7 +42,7 @@ public class LineRemover : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (removeControler.GetComponent<ReverseButtonControl>().undoCount > 0)
+        if (removeControler.GetComponent<ReverseButtonControl>().undoCount > 0 && reverseButtonActive.activeSelf)
         {
             Destroy(gameObject);
             removeControler.GetComponent<ReverseButtonControl>().undoCount--;
