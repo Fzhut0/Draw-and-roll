@@ -7,32 +7,60 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] GameObject linePrefab;
     [SerializeField] GameObject lineControl;
+    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] float timeToLoad = 10f;
 
     GameObject lineControlObj;
 
     Color lineColor;
     Color playerColor;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void Update()
     {
-        LineColorHandler();
+        PlayerLoadTimer();
     }
 
 
-    void LineColorHandler()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         lineColor = linePrefab.GetComponent<LineRenderer>().sharedMaterial.color;
         playerColor = GetComponent<SpriteRenderer>().material.color;
         lineControlObj = GameObject.FindGameObjectWithTag("LineControl");
 
-        if (lineColor != playerColor)
+
+        if (collision.collider.GetComponentInParent<LineRenderer>().sharedMaterial.color != playerColor)
         {
-            Time.timeScale = 0f;
-            lineControlObj.GetComponent<LineDrawer>().enabled = false;
-            lineControl.SetActive(false);
-            Debug.Log("wrong color");
+            LineColorHandler();
         }
         else { return; }
+    }
+
+
+    void LineColorHandler()
+    {
+
+        Time.timeScale = 0f;
+        lineControlObj.GetComponent<LineDrawer>().enabled = false;
+        lineControl.SetActive(false);
+        GameObject.FindGameObjectWithTag("UI").SetActive(false);
+        gameOverCanvas.SetActive(true);
+
+
+    }
+
+    void PlayerLoadTimer()
+    {
+
+
+
+        if (Time.timeSinceLevelLoad > timeToLoad)
+        {
+            GetComponentInParent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        }
+
+
 
     }
 
