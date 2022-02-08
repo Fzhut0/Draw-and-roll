@@ -18,6 +18,7 @@ public class ExitControl : MonoBehaviour
         if (playerPrefab)
         {
             collision.collider.GetComponentInParent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
             winConditionObj.GetComponent<WinControl>().currentWinConditionCount++;
         }
     }

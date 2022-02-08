@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
 
     GameObject lineControlObj;
 
-    Color lineColor;
+
     Color playerColor;
 
 
@@ -25,16 +25,18 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        lineColor = linePrefab.GetComponent<LineRenderer>().sharedMaterial.color;
+
         playerColor = GetComponent<SpriteRenderer>().material.color;
         lineControlObj = GameObject.FindGameObjectWithTag("LineControl");
 
+        if (GetComponentInParent<Rigidbody2D>().bodyType == RigidbodyType2D.Static) { return; }
 
         if (collision.collider.GetComponentInParent<LineRenderer>().sharedMaterial.color != playerColor)
         {
             LineColorHandler();
         }
         else { return; }
+
     }
 
 
