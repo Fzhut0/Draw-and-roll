@@ -18,6 +18,10 @@ public class LineDrawer : MonoBehaviour
     [SerializeField] Material color1;
     [SerializeField] Material color2;
 
+    [SerializeField] int maxLines = 6;
+
+    [SerializeField] List<GameObject> lineAmount = new List<GameObject>();
+
 
     private void Awake()
     {
@@ -31,11 +35,11 @@ public class LineDrawer : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (lineAmount.Count <= maxLines && Input.GetMouseButtonDown(0))
         {
             DrawLine();
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && lineAmount.Count <= maxLines)
         {
             Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count - 1]) > Mathf.NegativeInfinity)
@@ -59,6 +63,7 @@ public class LineDrawer : MonoBehaviour
         lineRender.SetPosition(0, fingerPositions[0]);
         lineRender.SetPosition(1, fingerPositions[1]);
         edgeCollider.points = fingerPositions.ToArray();
+        lineAmount.Add(currentLine);
 
 
     }
@@ -84,6 +89,8 @@ public class LineDrawer : MonoBehaviour
     {
         linePrefab.GetComponent<LineRenderer>().material = color2;
     }
+
+
 
 }
 

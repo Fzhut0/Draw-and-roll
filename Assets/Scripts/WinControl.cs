@@ -10,7 +10,7 @@ public class WinControl : MonoBehaviour
     [SerializeField] GameObject activeGameCanvas;
 
     [SerializeField] int winCondition;
-    [SerializeField] public int currentWinConditionCount = 0;
+    public int currentWinConditionCount = 0;
 
     private void Update()
     {
