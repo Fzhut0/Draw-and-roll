@@ -11,7 +11,7 @@ public class LineRemover : MonoBehaviour
     [SerializeField] GameObject removeControler;
 
     [SerializeField] Material originalMaterial;
-
+    [SerializeField] GameObject lineDrawer;
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class LineRemover : MonoBehaviour
     {
         removeControler = GameObject.FindGameObjectWithTag("ReverseCount");
         reverseButtonActive = GameObject.FindGameObjectWithTag("Reverse");
+        lineDrawer = GameObject.FindGameObjectWithTag("LineControl");
 
     }
 
@@ -45,6 +46,7 @@ public class LineRemover : MonoBehaviour
         if (reverseButtonActive == null) { return; }
         if (removeControler.GetComponent<ReverseButtonControl>().undoCount > 0 && reverseButtonActive.activeSelf)
         {
+            lineDrawer.GetComponent<LineDrawer>().lineAmount.Remove(gameObject);
             Destroy(gameObject);
             removeControler.GetComponent<ReverseButtonControl>().undoCount--;
             removeControler.GetComponent<ReverseButtonControl>().UpdateDisplay();

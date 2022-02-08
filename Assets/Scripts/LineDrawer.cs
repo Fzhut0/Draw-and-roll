@@ -20,7 +20,7 @@ public class LineDrawer : MonoBehaviour
 
     [SerializeField] int maxLines = 6;
 
-    [SerializeField] List<GameObject> lineAmount = new List<GameObject>();
+    [SerializeField] public List<GameObject> lineAmount = new List<GameObject>();
 
 
     private void Awake()
@@ -89,6 +89,8 @@ public class LineDrawer : MonoBehaviour
     {
         linePrefab.GetComponent<LineRenderer>().material = color2;
     }
+
+
 
 
 
