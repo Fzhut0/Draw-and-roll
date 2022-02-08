@@ -22,13 +22,12 @@ public class LineDrawer : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1f;
+        if (!GameObject.FindGameObjectWithTag("UI").activeSelf)
+        {
+            GameObject.FindGameObjectWithTag("UI").SetActive(true);
+        }
     }
 
-
-    private void Start()
-    {
-
-    }
     void Update()
     {
 
@@ -38,15 +37,11 @@ public class LineDrawer : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-
-
             Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count - 1]) > Mathf.NegativeInfinity)
             {
                 LineUpdate(tempFingerPos);
-
             }
-
         }
     }
 

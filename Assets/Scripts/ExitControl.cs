@@ -3,32 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TrapControl : MonoBehaviour
+public class ExitControl : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab;
-    [SerializeField] GameObject gameOverCanvas;
+    [SerializeField] GameObject gameWinCanvas;
     [SerializeField] GameObject activeGameCanvas;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (playerPrefab)
         {
             Time.timeScale = 0f;
             activeGameCanvas.SetActive(false);
-            gameOverCanvas.SetActive(true);
+            gameWinCanvas.SetActive(true);
+
         }
     }
 
-    public void RetryButton()
+    public void LoadNextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void QuitButton()
-    {
-
-        Application.Quit();
-    }
 
 }
