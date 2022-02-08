@@ -6,24 +6,20 @@ using UnityEngine.SceneManagement;
 public class ExitControl : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab;
-    [SerializeField] GameObject gameWinCanvas;
-    [SerializeField] GameObject activeGameCanvas;
+    [SerializeField] GameObject winConditionObj;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+
+
 
         if (playerPrefab)
         {
-            Time.timeScale = 0f;
-            activeGameCanvas.SetActive(false);
-            gameWinCanvas.SetActive(true);
-
+            collision.collider.GetComponentInParent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            winConditionObj.GetComponent<WinControl>().currentWinConditionCount++;
         }
-    }
-
-    public void LoadNextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 
