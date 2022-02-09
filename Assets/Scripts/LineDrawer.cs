@@ -20,7 +20,11 @@ public class LineDrawer : MonoBehaviour
 
     [SerializeField] int maxLines = 6;
 
-    [SerializeField] public List<GameObject> lineAmount = new List<GameObject>();
+    public List<GameObject> lineAmount = new List<GameObject>();
+
+    [SerializeField] int maxLineSize = 50;
+
+    [SerializeField] float maxLineLength = 20;
 
 
     private void Awake()
@@ -34,19 +38,8 @@ public class LineDrawer : MonoBehaviour
 
     void Update()
     {
+        CreateGameLine();
 
-        if (lineAmount.Count <= maxLines && Input.GetMouseButtonDown(0))
-        {
-            DrawLine();
-        }
-        if (Input.GetMouseButton(0) && lineAmount.Count <= maxLines)
-        {
-            Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count - 1]) > Mathf.NegativeInfinity)
-            {
-                LineUpdate(tempFingerPos);
-            }
-        }
     }
 
 
@@ -71,6 +64,8 @@ public class LineDrawer : MonoBehaviour
     void LineUpdate(Vector2 newFingerPos)
     {
         fingerPositions.Add(newFingerPos);
+
+
         lineRender.positionCount++;
         lineRender.SetPosition(lineRender.positionCount - 1, newFingerPos);
 
@@ -91,8 +86,25 @@ public class LineDrawer : MonoBehaviour
     }
 
 
+    void CreateGameLine()
+    {
+        if (lineAmount.Count < maxLines && Input.GetMouseButtonDown(0))
+        {
+            DrawLine();
+        }
+        if (Input.GetMouseButton(0) && lineRender.positionCount < maxLineSize)
+        {
 
+            Vector2 currentFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float distanceToMousePos = Vector2.Distance(fingerPositions[0], currentFingerPos);
+            if (distanceToMousePos > maxLineLength) { return; }
+            else if (currentFingerPos != fingerPositions[0] && currentFingerPos != fingerPositions[fingerPositions.Count - 1])
+            {
+                LineUpdate(currentFingerPos);
+            }
 
+        }
+    }
 
 }
 
