@@ -8,6 +8,7 @@ public class WinControl : MonoBehaviour
 
     [SerializeField] GameObject gameWinCanvas;
     [SerializeField] GameObject activeGameCanvas;
+    [SerializeField] GameObject lineDrawControl;
 
     [SerializeField] int winCondition;
     public int currentWinConditionCount = 0;
@@ -17,6 +18,7 @@ public class WinControl : MonoBehaviour
         if (currentWinConditionCount == winCondition)
         {
             Time.timeScale = 0f;
+            lineDrawControl.SetActive(false);
             activeGameCanvas.SetActive(false);
             gameWinCanvas.SetActive(true);
         }

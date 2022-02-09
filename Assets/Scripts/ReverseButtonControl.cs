@@ -32,7 +32,7 @@ public class ReverseButtonControl : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        undoCountText.text = "You can erase\u00A0" + undoCount + "\u00A0more lines";
+        undoCountText.text = "You can erase " + undoCount + " more lines";
         if (undoCount == 0)
         {
             undoCountText.text = "You can't erase more lines!";

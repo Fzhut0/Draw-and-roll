@@ -23,17 +23,20 @@ public class LineRemover : MonoBehaviour
         reverseButtonActive = GameObject.FindGameObjectWithTag("Reverse");
         lineDrawer = GameObject.FindGameObjectWithTag("LineControl");
 
+
     }
 
 
 
     private void OnMouseOver()
     {
+
         if (reverseButtonActive == null) { return; }
         if (reverseButtonActive.activeSelf)
         {
             GetComponent<LineRenderer>().material = removeColor;
         }
+
     }
 
     private void OnMouseExit()

@@ -31,7 +31,7 @@ public class PlayerControl : MonoBehaviour
 
         if (GetComponentInParent<Rigidbody2D>().bodyType == RigidbodyType2D.Static) { return; }
 
-        if (collision.collider.GetComponentInParent<LineRenderer>().sharedMaterial.color != playerColor)
+        if (collision.collider.GetComponentInParent<LineRenderer>() && collision.collider.GetComponentInParent<LineRenderer>().sharedMaterial.color != playerColor)
         {
             LineColorHandler();
         }

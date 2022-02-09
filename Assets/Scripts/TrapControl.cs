@@ -9,6 +9,7 @@ public class TrapControl : MonoBehaviour
     [SerializeField] GameObject gameOverCanvas;
     [SerializeField] GameObject activeGameCanvas;
 
+    [SerializeField] GameObject mouseOverControl;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (playerPrefab)
@@ -31,4 +32,14 @@ public class TrapControl : MonoBehaviour
         Application.Quit();
     }
 
+
+    private void OnMouseOver()
+    {
+        mouseOverControl.GetComponent<ReverseButtonControl>().StopDraw();
+    }
+
+    private void OnMouseExit()
+    {
+        mouseOverControl.GetComponent<ReverseButtonControl>().StartDraw();
+    }
 }

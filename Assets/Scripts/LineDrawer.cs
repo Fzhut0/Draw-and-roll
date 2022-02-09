@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 
@@ -26,6 +27,12 @@ public class LineDrawer : MonoBehaviour
 
     [SerializeField] float maxLineLength = 20;
 
+    [SerializeField] TextMeshProUGUI maxLinesText;
+
+    [SerializeField] int availableLines;
+
+    [SerializeField] GameObject removeCanvas;
+
 
     private void Awake()
     {
@@ -34,12 +41,14 @@ public class LineDrawer : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("UI").SetActive(true);
         }
+
+
     }
 
     void Update()
     {
         CreateGameLine();
-
+        UpdateLinesDisplay();
     }
 
 
@@ -88,7 +97,7 @@ public class LineDrawer : MonoBehaviour
 
     void CreateGameLine()
     {
-        if (lineAmount.Count < maxLines && Input.GetMouseButtonDown(0))
+        if (lineAmount.Count < maxLines && Input.GetMouseButtonDown(0) && !removeCanvas.activeSelf)
         {
             DrawLine();
         }
@@ -106,6 +115,13 @@ public class LineDrawer : MonoBehaviour
         }
     }
 
+
+    void UpdateLinesDisplay()
+    {
+        availableLines = maxLines - lineAmount.Count;
+
+        maxLinesText.text = availableLines.ToString();
+    }
 }
 
 
