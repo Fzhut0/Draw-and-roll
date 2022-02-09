@@ -12,12 +12,10 @@ public class ExitControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-
         if (playerPrefab)
         {
             collision.collider.GetComponentInParent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            Destroy(collision.collider.gameObject);
 
             winConditionObj.GetComponent<WinControl>().currentWinConditionCount++;
         }
