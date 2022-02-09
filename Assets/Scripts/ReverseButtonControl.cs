@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ReverseButtonControl : MonoBehaviour
 {
@@ -39,5 +40,9 @@ public class ReverseButtonControl : MonoBehaviour
         }
     }
 
+    public void RestartLevel()
+    {
 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

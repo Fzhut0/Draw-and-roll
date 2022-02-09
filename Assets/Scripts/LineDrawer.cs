@@ -101,13 +101,13 @@ public class LineDrawer : MonoBehaviour
         {
             DrawLine();
         }
-        if (Input.GetMouseButton(0) && lineRender.positionCount < maxLineSize)
+        if (Input.GetMouseButton(0) && lineRender.positionCount < maxLineSize && !removeCanvas.activeSelf)
         {
 
             Vector2 currentFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             float distanceToMousePos = Vector2.Distance(fingerPositions[0], currentFingerPos);
             if (distanceToMousePos > maxLineLength) { return; }
-            else if (currentFingerPos != fingerPositions[0] && currentFingerPos != fingerPositions[fingerPositions.Count - 1])
+            if (currentFingerPos != fingerPositions[0] && currentFingerPos != fingerPositions[fingerPositions.Count - 1])
             {
                 LineUpdate(currentFingerPos);
             }
