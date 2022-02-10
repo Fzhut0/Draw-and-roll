@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] GameObject timerText;
     [SerializeField] Color removeColor;
 
+
     GameObject lineControlObj;
 
     [SerializeField] float remainingTime;
@@ -23,9 +24,10 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
-        q
-        PlayerLoadTimer();
-
+        if (lineControl.activeSelf)
+        {
+            PlayerLoadTimer();
+        }
     }
 
 

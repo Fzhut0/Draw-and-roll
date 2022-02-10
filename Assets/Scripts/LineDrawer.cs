@@ -18,6 +18,7 @@ public class LineDrawer : MonoBehaviour
 
     [SerializeField] Material color1;
     [SerializeField] Material color2;
+    [SerializeField] Material color3;
 
     [SerializeField] int maxLines = 6;
 
@@ -92,6 +93,11 @@ public class LineDrawer : MonoBehaviour
     public void LineColorChangeBlue()
     {
         linePrefab.GetComponent<LineRenderer>().material = color2;
+    }
+
+    public void LineColorChangeGreen()
+    {
+        linePrefab.GetComponent<LineRenderer>().material = color3;
     }
 
 
